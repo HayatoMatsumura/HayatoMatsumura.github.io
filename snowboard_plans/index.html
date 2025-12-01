@@ -2,18 +2,24 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>2026年1月24-25日 スノボ1泊2日プラン案</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2026年1月 スノボ1泊2日プラン</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     :root {
-      --bg: #ffffff;
-      --bg-alt: #f7f7fb;
-      --accent: #1e88e5;
-      --accent-soft: #e3f2fd;
-      --text-main: #222222;
-      --text-muted: #666666;
-      --border-soft: #e0e0e0;
-      --chip-bg: #f1f3f5;
+      --bg: #f3f4f6;
+      --fg: #111827;
+      --muted: #6b7280;
+      --accent: #0284c7;
+      --accent-soft: #e0f2fe;
+      --accent2: #ec4899;
+      --accent2-soft: #fce7f3;
+      --accent3: #10b981;
+      --accent3-soft: #d1fae5;
+      --border: #e5e7eb;
+      --chip: #e5e7eb;
+      --radius-lg: 28px;
+      --radius-md: 18px;
+      --shadow: 0 20px 45px rgba(15, 23, 42, 0.18);
     }
 
     * {
@@ -22,786 +28,915 @@
 
     body {
       margin: 0;
-      padding: 32px 0;
-      background: #eceff1;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-      color: var(--text-main);
+      padding: 24px;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .phone-frame {
+      margin: 0 auto;
+      max-width: 480px;
+      aspect-ratio: 9 / 16;
+      max-height: calc(100vh - 48px);
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      display: flex;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+    }
+
+    .pages {
+      flex: 1;
+      overflow-y: auto;
+      scroll-snap-type: y mandatory;
+      scroll-behavior: smooth;
+      background: radial-gradient(circle at top left, #e0f2fe 0, #ffffff 36%, #ffffff 100%);
     }
 
     .page {
-      width: 900px;
-      height: 1600px; /* 9:16 縦長 */
-      margin: 0 auto 40px;
-      background: var(--bg);
-      border-radius: 32px;
-      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.08);
-      padding: 64px 72px;
+      scroll-snap-align: start;
+      min-height: 100%;
+      padding: 24px 20px 32px;
       display: flex;
       flex-direction: column;
-      gap: 40px;
+      justify-content: space-between;
       position: relative;
-      overflow: hidden;
     }
 
-    .page::after {
-      content: attr(data-page);
-      position: absolute;
-      right: 56px;
-      bottom: 40px;
-      font-size: 12px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--text-muted);
+    .page:not(:last-child) {
+      border-bottom: 1px solid rgba(229, 231, 235, 0.85);
     }
 
-    header.page-header {
+    .page-inner {
+      flex: 1;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 18px;
     }
 
-    .eyebrow {
-      font-size: 12px;
-      letter-spacing: 0.22em;
+    .page-header small {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--accent);
+      color: var(--muted);
+    }
+
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent);
     }
 
     h1, h2, h3 {
       margin: 0;
+      letter-spacing: 0.02em;
     }
 
     h1 {
-      font-size: 32px;
-      line-height: 1.4;
-      letter-spacing: 0.04em;
+      font-size: 22px;
+      line-height: 1.2;
     }
 
     h2 {
-      font-size: 24px;
-      margin-bottom: 4px;
+      font-size: 20px;
+      line-height: 1.25;
     }
 
     h3 {
-      font-size: 18px;
-      color: var(--text-muted);
-      font-weight: 500;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--muted);
     }
 
     p {
       margin: 0;
-      line-height: 1.8;
-      font-size: 14px;
+      font-size: 13px;
+      line-height: 1.6;
+      color: #4b5563;
     }
 
-    .meta-row {
+    .chips {
       display: flex;
       flex-wrap: wrap;
-      gap: 16px 24px;
-      font-size: 13px;
-      color: var(--text-muted);
-    }
-
-    .meta-item {
-      display: flex;
-      align-items: center;
       gap: 6px;
+      margin-top: 10px;
     }
 
-    .pill {
-      display: inline-flex;
-      align-items: center;
+    .chip {
       padding: 4px 10px;
       border-radius: 999px;
       font-size: 11px;
-      background: var(--chip-bg);
-      color: var(--text-muted);
-      gap: 6px;
+      background: rgba(15, 23, 42, 0.03);
+      border: 1px solid var(--chip);
+      color: #374151;
+      white-space: nowrap;
     }
 
-    .pill strong {
+    .chip.primary {
+      background: var(--accent-soft);
+      border-color: rgba(37, 99, 235, 0.25);
+      color: #0369a1;
       font-weight: 600;
-      color: var(--text-main);
     }
 
-    .section {
-      padding: 18px 20px;
-      border-radius: 20px;
-      background: var(--bg-alt);
-      border: 1px solid var(--border-soft);
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
+    .chip.hot {
+      background: var(--accent2-soft);
+      border-color: rgba(236, 72, 153, 0.25);
+      color: #be185d;
+      font-weight: 600;
     }
 
-    .section-header {
+    .chip.soft {
+      background: rgba(15, 23, 42, 0.02);
+    }
+
+    .summary-grid {
+      display: grid;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .summary-card {
+      border-radius: var(--radius-md);
+      padding: 10px 12px 12px;
+      border: 1px solid rgba(209, 213, 219, 0.8);
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+    }
+
+    .summary-card h4 {
+      margin: 0;
+      font-size: 13px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
+      gap: 6px;
     }
 
-    .section-title {
-      font-size: 14px;
-      font-weight: 600;
-      letter-spacing: 0.12em;
+    .summary-card h4 span {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--muted);
+    }
+
+    .summary-card p {
+      margin-top: 6px;
+      font-size: 12px;
+      color: #4b5563;
+    }
+
+    .pill-index {
+      font-size: 11px;
+      padding: 2px 7px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      color: #4b5563;
+      background: rgba(248, 250, 252, 0.7);
+    }
+
+    .page-footer {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .page-footer .nav-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .nav-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(209, 213, 219, 0.7);
+    }
+
+    .nav-dot.active {
+      background: var(--accent);
+    }
+
+    .nav-hint {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 10px;
+      color: #9ca3af;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: var(--text-muted);
+    }
+
+    /* PLAN cards */
+
+    .plan-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .plan-label span.badge {
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      font-size: 10px;
+      text-transform: none;
+      letter-spacing: 0.04em;
+    }
+
+    .plan-header-line {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 6px;
     }
 
     .tag-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 4px;
+      gap: 6px;
+      margin-top: 10px;
     }
 
     .tag {
-      padding: 4px 10px;
-      border-radius: 999px;
       font-size: 11px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(209, 213, 219, 0.9);
+      background: rgba(249, 250, 251, 0.9);
+      color: #374151;
+    }
+
+    .tag.accent {
+      border-color: rgba(56, 189, 248, 0.7);
       background: var(--accent-soft);
-      color: var(--accent);
+      color: #0369a1;
       font-weight: 500;
     }
 
-    .grid-2 {
+    .tag.accent2 {
+      border-color: rgba(248, 113, 113, 0.7);
+      background: var(--accent2-soft);
+      color: #b91c1c;
+      font-weight: 500;
+    }
+
+    .tag.accent3 {
+      border-color: rgba(45, 212, 191, 0.7);
+      background: var(--accent3-soft);
+      color: #047857;
+      font-weight: 500;
+    }
+
+    .plan-grid {
       display: grid;
-      grid-template-columns: 1.3fr 1fr;
-      gap: 20px;
+      gap: 12px;
+      margin-top: 12px;
     }
 
-    .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
+    .plan-grid.two-col {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .grid-2 > .section,
-    .grid-3 > .section {
-      height: 100%;
+    .card {
+      border-radius: 16px;
+      padding: 10px 11px 11px;
+      border: 1px solid rgba(209, 213, 219, 0.9);
+      background: rgba(249, 250, 251, 0.98);
     }
 
-    ul {
+    .card h4 {
       margin: 0;
-      padding-left: 1.2em;
-      font-size: 14px;
-      line-height: 1.7;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #111827;
     }
 
-    li {
-      margin-bottom: 4px;
+    .card h4 span.icon {
+      font-size: 14px;
+    }
+
+    .card p {
+      margin-top: 6px;
+      font-size: 12px;
+      color: #4b5563;
+    }
+
+    .card ul {
+      margin: 6px 0 0;
+      padding-left: 16px;
+    }
+
+    .card ul li {
+      font-size: 12px;
+      color: #4b5563;
+      margin-bottom: 3px;
+    }
+
+    .card small {
+      display: block;
+      margin-top: 6px;
+      font-size: 11px;
+      color: #9ca3af;
+    }
+
+    .budget {
+      font-size: 13px;
+      font-weight: 600;
+      margin-top: 6px;
+      color: #111827;
+    }
+
+    .budget span {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--muted);
+      margin-left: 4px;
     }
 
     .timeline {
+      margin-top: 6px;
+      border-left: 1px solid rgba(209, 213, 219, 0.9);
+      padding-left: 12px;
       display: flex;
       flex-direction: column;
-      gap: 8px;
-      margin-top: 4px;
-    }
-
-    .time-row {
-      display: grid;
-      grid-template-columns: 80px minmax(0, 1fr);
       gap: 10px;
-      font-size: 13px;
     }
 
-    .time-label {
+    .timeline-item {
+      position: relative;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -13px;
+      top: 4px;
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #ffffff;
+      border: 2px solid var(--accent);
+    }
+
+    .timeline-item h5 {
+      margin: 0;
+      font-size: 12px;
       font-weight: 600;
-      color: var(--accent);
-    }
-
-    .highlight-card {
-      border-radius: 24px;
-      padding: 20px 22px;
-      background: linear-gradient(135deg, #e3f2fd, #f3e5f5);
-      border: 1px solid rgba(255, 255, 255, 0.7);
-      box-shadow: 0 18px 40px rgba(30, 136, 229, 0.18);
       display: flex;
-      flex-direction: column;
-      gap: 8px;
+      align-items: baseline;
+      gap: 6px;
+      color: #111827;
     }
 
-    .highlight-card h2 {
-      font-size: 26px;
-    }
-
-    .highlight-badge {
+    .timeline-item h5 span {
       font-size: 11px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--accent);
-      font-weight: 700;
+      font-weight: 500;
+      color: var(--muted);
     }
 
-    .resort-name {
-      font-size: 20px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
+    .timeline-item p {
+      margin-top: 4px;
+      font-size: 12px;
+      color: #4b5563;
     }
 
     .note {
+      margin-top: 4px;
       font-size: 11px;
-      color: var(--text-muted);
+      color: #9ca3af;
     }
 
-    table.compare {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 12px;
-    }
-
-    table.compare th,
-    table.compare td {
-      padding: 8px 10px;
-      border-bottom: 1px solid var(--border-soft);
-      text-align: left;
-      vertical-align: top;
-    }
-
-    table.compare th {
-      font-weight: 600;
-      color: var(--text-muted);
-      white-space: nowrap;
-    }
-
-    table.compare tr:last-child th,
-    table.compare tr:last-child td {
-      border-bottom: none;
-    }
-
-    .badge {
+    .highlight-bar {
       display: inline-flex;
       align-items: center;
-      justify-content: center;
-      min-width: 70px;
-      padding: 3px 8px;
+      gap: 6px;
+      padding: 6px 10px;
       border-radius: 999px;
+      background: rgba(248, 250, 252, 0.9);
+      border: 1px dashed rgba(148, 163, 184, 0.7);
       font-size: 11px;
-      font-weight: 600;
-      background: var(--chip-bg);
-      color: var(--text-muted);
+      color: #4b5563;
+      margin-top: 10px;
+      max-width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
-    .badge.primary {
-      background: var(--accent);
-      color: #ffffff;
+    .highlight-bar span.icon {
+      font-size: 14px;
     }
 
-    .small-label {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    .footnote {
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-top: 4px;
-    }
-
-    .divider-label {
-      font-size: 11px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 6px;
-    }
-
-    .list-inline {
+    .level-badges {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
-      font-size: 13px;
+      gap: 6px;
+      margin-top: 6px;
     }
 
-    .list-inline span::before {
-      content: "・";
-      margin-right: 2px;
+    .level {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(209, 213, 219, 0.9);
+      background: rgba(255, 255, 255, 0.9);
+      color: #374151;
     }
 
-    @media (max-width: 1000px) {
+    .level.good {
+      border-color: rgba(34, 197, 94, 0.75);
+      background: rgba(22, 163, 74, 0.06);
+      color: #15803d;
+      font-weight: 500;
+    }
+
+    .level.caution {
+      border-color: rgba(249, 115, 22, 0.75);
+      background: rgba(251, 146, 60, 0.06);
+      color: #c2410c;
+    }
+
+    .small-caption {
+      margin-top: 4px;
+      font-size: 11px;
+      color: #9ca3af;
+    }
+
+    @media (max-width: 600px) {
       body {
-        padding: 0;
-        background: #ffffff;
+        padding: 10px;
+      }
+      .phone-frame {
+        border-radius: 24px;
+        max-height: calc(100vh - 20px);
       }
       .page {
-        width: 100vw;
-        height: calc(100vw * 16 / 9); /* ビューポートに対しても9:16を維持 */
-        border-radius: 0;
-        margin-bottom: 24px;
-        padding: 36px 24px;
-        box-shadow: none;
+        padding: 20px 16px 28px;
       }
-      .grid-2,
-      .grid-3 {
-        grid-template-columns: 1fr;
+    }
+
+    @media (max-width: 400px) {
+      .plan-grid.two-col {
+        grid-template-columns: minmax(0, 1fr);
       }
     }
   </style>
 </head>
 <body>
+  <div class="phone-frame">
+    <div class="pages">
+      <!-- PAGE 1: OVERVIEW -->
+      <section class="page page-intro" id="overview">
+        <div class="page-inner">
+          <header class="page-header">
+            <small>
+              <span class="dot"></span>
+              SNOW TRIP / 2026.01.24-25
+            </small>
+            <h1>関西×関東 4名で行く<br>1泊2日スノボプラン集</h1>
+            <p style="margin-top:8px;">
+              関西3名＋関東1名、全員初心者〜中級者想定。<br>
+              2026年1月24日(土)〜25日(日)に、現地合流しやすいエリアの候補を3パターン用意しました。
+            </p>
+            <div class="chips">
+              <span class="chip primary">1泊2日 / 週末</span>
+              <span class="chip">現地合流OK</span>
+              <span class="chip">初心者レッスン想定</span>
+              <span class="chip soft">移動しやすさ重視</span>
+            </div>
+          </header>
 
-  <!-- PAGE 1: Overview -->
-  <section class="page" data-page="page 01 / overview">
-    <header class="page-header">
-      <div class="eyebrow">Snowboard Weekend 2026</div>
-      <h1>2026年1月24–25日<br>関西3名＋関東1名 スノボ1泊2日プラン案</h1>
-      <p>
-        1泊2日で無理なく楽しめて、関西・関東の4名が現地合流しやすい候補地をピックアップしました。<br>
-        いずれも初心者〜中級者向けコースが充実し、ゲレンデ＋温泉・グルメも楽しめるエリアです。
-      </p>
-    </header>
-
-    <div class="meta-row">
-      <div class="meta-item">
-        <span class="pill"><strong>日程</strong> 2026/1/24(土) – 25(日)・1泊2日</span>
-      </div>
-      <div class="meta-item">
-        <span class="pill"><strong>人数</strong> 4名（関西3・関東1）</span>
-      </div>
-      <div class="meta-item">
-        <span class="pill"><strong>レベル感</strong> 初心者〜中級者</span>
-      </div>
-    </div>
-
-    <div class="section">
-      <div class="section-header">
-        <div>
-          <div class="section-title">Trip Concept</div>
-          <h3>移動しすぎず、滑走時間とアフターをしっかり確保</h3>
-        </div>
-      </div>
-      <ul>
-        <li>関西・関東のどちらからも <strong>おおむね3〜5時間前後</strong> でアクセス可能なエリアを優先。</li>
-        <li>1日目午後〜2日目夕方まで、<strong>実質1.5日分ほど滑走</strong> できる想定。</li>
-        <li>レンタルやスクールが充実し、<strong>初心者が迷子になりにくいレイアウト</strong> のゲレンデを選定。</li>
-        <li>温泉街 or 宿の温泉で、<strong>滑ったあとのリカバリー</strong> もしっかりできる構成。</li>
-      </ul>
-    </div>
-
-    <div class="grid-3">
-      <div class="section">
-        <div class="section-header">
-          <div>
-            <div class="section-title">Plan A</div>
-            <h2>白馬エリア（長野）</h2>
+          <div class="summary-grid">
+            <div class="summary-card">
+              <h4>
+                PLAN A：白馬八方尾根
+                <span class="pill-index">王道×ロングコース</span>
+              </h4>
+              <p>
+                日本屈指のビッグゲレンデ。コースの選択肢が多く、初中級者も景色を楽しみながらロングランが可能。<br>
+                関西は夜行バス、関東は新幹線＋バス合流がしやすいプラン。
+              </p>
+            </div>
+            <div class="summary-card">
+              <h4>
+                PLAN B：野沢温泉
+                <span class="pill-index">滑り＋温泉街</span>
+              </h4>
+              <p>
+                コースの約7割が初級〜中級レベルで、デビュー組も安心。温泉街で外湯めぐり＆飲み歩きが楽しい「滑ってよし・飲んでよし」なプラン。
+              </p>
+            </div>
+            <div class="summary-card">
+              <h4>
+                PLAN C：GALA湯沢
+                <span class="pill-index">アクセス最強</span>
+              </h4>
+              <p>
+                東京駅から最速約71分、駅直結のスキーセンターで手ぶらでもOK。<br>
+                関西からは新幹線乗り継ぎで少し移動は長いものの、「移動ストレス少なめ」重視なら候補に。
+              </p>
+            </div>
           </div>
-          <span class="badge primary">バランス型</span>
-        </div>
-        <p>
-          東京からは北陸新幹線＋バスで最短約2時間50分、<br>
-          大阪からも新幹線＋特急で約4時間半程度で到着できる人気エリア。<br>
-          コースのバリエーションが豊富で、初心者〜中級者が混ざっても遊びやすいです。
-        </p>
-        <div class="tag-row">
-          <span class="tag">アクセス◎</span>
-          <span class="tag">ゲレンデの選択肢が豊富</span>
-          <span class="tag">英語対応のお店も多め</span>
-        </div>
-      </div>
 
-      <div class="section">
-        <div class="section-header">
-          <div>
-            <div class="section-title">Plan B</div>
-            <h2>野沢温泉（長野）</h2>
+          <div class="highlight-bar">
+            <span class="icon">💡</span>
+            同じ宿を指定して、関西発ツアー＋関東発ツアー or 個別手配で「現地集合・現地解散」がしやすい構成にしています。
           </div>
-          <span class="badge">温泉街重視</span>
-        </div>
-        <p>
-          東京からは北陸新幹線＋バスで約2時間前後、<br>
-          大阪からも新幹線乗り継ぎで4〜5時間ほど。<br>
-          村全体が温泉街になっており、滑走後の外湯めぐりが魅力です。
-        </p>
-        <div class="tag-row">
-          <span class="tag">外湯めぐり</span>
-          <span class="tag">初心者向けコース◎</span>
-          <span class="tag">ローカル感ある飲食店</span>
-        </div>
-      </div>
 
-      <div class="section">
-        <div class="section-header">
-          <div>
-            <div class="section-title">Plan C</div>
-            <h2>志賀高原（長野）</h2>
+          <p class="small-caption">
+            ※具体的な予約は、オリオンツアー・トラベルロードなどのスキーツアーサイトで<br>
+            「発地別に同じゲレンデ・同じ宿を選ぶ」形にすると揃えやすいです。
+          </p>
+          <!-- Tour search refs:  [oai_citation:0‡トラベルロード](https://roadplan.net/?utm_source=chatgpt.com) -->
+        </div>
+
+        <div class="page-footer">
+          <div class="nav-dots">
+            <div class="nav-dot active"></div>
+            <div class="nav-dot"></div>
+            <div class="nav-dot"></div>
+            <div class="nav-dot"></div>
           </div>
-          <span class="badge">滑走時間重視</span>
+          <div class="nav-hint">下にスワイプして各プランを見る</div>
         </div>
-        <p>
-          東京からは新幹線＋バスで約3〜4時間、<br>
-          大阪からは新幹線乗り継ぎで5〜6時間程度。<br>
-          日本最大級の広さを誇る高原ゲレンデで、1泊2日でも滑りごたえ充分です。
-        </p>
-        <div class="tag-row">
-          <span class="tag">標高が高く雪質◎</span>
-          <span class="tag">エリアがとても広い</span>
-          <span class="tag">初心者〜上級者まで対応</span>
-        </div>
-      </div>
-    </div>
+        <div class="scroll-hint">SCROLL</div>
+      </section>
 
-    <div class="footnote">
-      ※移動時間は公式サイト・観光サイトを参考にした目安です。実際のダイヤや所要時間は、予約時に再確認してください。
-    </div>
-  </section>
+      <!-- PAGE 2: PLAN A HAKUBA -->
+      <section class="page plan plan-a" id="plan-a">
+        <div class="page-inner">
+          <header>
+            <div class="plan-label">
+              PLAN A
+              <span class="badge">バランス型</span>
+            </div>
+            <h2>白馬八方尾根<br>王道ビッグゲレンデ満喫プラン</h2>
+            <p class="plan-header-line">
+              コースの選択肢＆景色重視。中級者はロングコースをガッツリ、初心者はゴンドラ上部の緩斜面でレッスンしながら楽しむ構成です。
+            </p>
+            <div class="tag-row">
+              <span class="tag accent">長野県・白馬村</span>
+              <span class="tag">HAKUBA VALLEYエリア</span>
+              <span class="tag">ロングラン豊富</span>
+              <span class="tag">ゲレ食＆温泉充実</span>
+            </div>
+            <div class="level-badges">
+              <span class="level good">初心者：◎（迂回コース・緩斜面あり）</span>
+              <span class="level good">中級者：◎（パノラマ・リーゼンなど）</span>
+              <span class="level">上級者：◯（非圧雪・急斜面も多い）</span>
+            </div>
+            <p class="small-caption">
+              ※八方尾根は初級〜上級まで多彩なコース構成。特にパノラマゲレンデなどは中級者の足慣らしに人気で、迂回林道を使えば初級者もチャレンジしやすいゲレンデ構成です。
+            </p>
+          </header>
 
-  <!-- PAGE 2: Plan A Hakuba -->
-  <section class="page" data-page="page 02 / plan a">
-    <header class="page-header">
-      <div class="eyebrow">Plan A</div>
-      <h1>白馬エリア 1泊2日プラン<br><span style="font-size:18px;color:#666;font-weight:500;">（白馬八方尾根／白馬五竜〜47 など）</span></h1>
-      <div class="meta-row">
-        <div class="meta-item">
-          <span class="pill"><strong>おすすめ度</strong> バランス型で全員が遊びやすい</span>
-        </div>
-        <div class="meta-item">
-          <span class="pill"><strong>主な移動</strong> 新幹線＋バス or 特急＋バス</span>
-        </div>
-      </div>
-    </header>
+          <div class="plan-grid two-col">
+            <div class="card">
+              <h4><span class="icon">🚆</span>アクセスのイメージ</h4>
+              <ul>
+                <li><strong>関東(東京) → 白馬</strong><br>
+                  東京駅→長野駅：北陸新幹線で約1.5時間<br>
+                  長野駅→白馬：特急バスで約2.5時間
+                </li>
+                <li><strong>関西(大阪・京都) → 白馬</strong><br>
+                  夜行バス：大阪(梅田/難波など)→白馬 約8時間50分程度（翌朝到着）<br>
+                  もしくは新幹線・特急乗り継ぎで約5〜6時間を想定。
+                </li>
+              </ul>
+              <small>
+                ※時刻・所要時間は2025-26シーズン前後の情報を元にした目安です。<br>
+                具体的なダイヤは各社サイトでご確認ください。
+              </small>
+              <!-- Hakuba access & level refs:  [oai_citation:1‡白馬村公式観光サイト](https://vill-hakuba.nagano.jp/access/?utm_source=chatgpt.com) -->
+            </div>
 
-    <div class="grid-2">
-      <div class="section">
-        <div class="section-header">
-          <div>
-            <div class="section-title">Access</div>
-            <h3>関東・関西ともにアクセスしやすい定番エリア</h3>
+            <div class="card">
+              <h4><span class="icon">🛏️</span>宿・集合イメージ</h4>
+              <ul>
+                <li>エリア：八方尾根スキー場「ゴンドラ乗り場〜八方バスターミナル」周辺</li>
+                <li>タイプ：ゲレンデ徒歩圏のペンション or ホテル（2〜4名1室）</li>
+                <li>合流：<strong>24日(土) 10:00頃に八方ゴンドラ駅前で集合</strong></li>
+              </ul>
+              <small>関西組は前夜発バスで朝到着、関東組は朝イチ新幹線＋バスで現地入りすると、合流しやすい時間帯です。</small>
+            </div>
           </div>
-        </div>
-        <ul>
-          <li><strong>関東（例：東京駅）発</strong><br>
-            ・北陸新幹線で「長野駅」へ（約1時間20分）<br>
-            ・長野駅から白馬方面の特急バスで約1時間<br>
-            → 合計およそ <strong>2.5〜3時間</strong> で到着
-          </li>
-          <li><strong>関西（例：新大阪駅）発</strong><br>
-            ・東海道新幹線で「名古屋」へ（約50分）<br>
-            ・特急しなの号で「松本／長野」へ（約3時間前後）<br>
-            ・在来線またはバスで白馬へ（約1〜1.5時間）<br>
-            → 合計およそ <strong>4〜5時間</strong>
-          </li>
-        </ul>
-        <p class="footnote">
-          ※一部区間は直通バス利用など、好みでアレンジ可能です。
-        </p>
-      </div>
 
-      <div class="section">
-        <div class="section-header">
-          <div>
-            <div class="section-title">Resort Mood</div>
-            <h3>英語対応もしやすい国際色豊かな山</h3>
-          </div>
-        </div>
-        <ul>
-          <li>白馬八方尾根・五竜・47 など、ゲレンデの選択肢が多い。</li>
-          <li>初心者〜中級者向けの長いクルージングコースが豊富。</li>
-          <li>カフェ・バー・レストランが多く、夜まで楽しめる。</li>
-          <li>雪質は安定し、景色もダイナミックで写真映え◎。</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="section">
-      <div class="section-header">
-        <div>
-          <div class="section-title">Sample Schedule</div>
-          <h3>1泊2日モデルタイムライン（目安）</h3>
-        </div>
-      </div>
-      <div class="grid-2">
-        <div>
-          <div class="divider-label">Day 1 – 1/24 (Sat.)</div>
-          <div class="timeline">
-            <div class="time-row">
-              <div class="time-label">07:00〜</div>
-              <div>
-                関東：東京駅集合 → 北陸新幹線で長野へ<br>
-                関西：新大阪駅出発 → 名古屋経由で長野方面へ
+          <div class="card">
+            <h4><span class="icon">📅</span>サンプル行程</h4>
+            <div class="timeline">
+              <div class="timeline-item">
+                <h5>DAY 1（1/24 土） <span>滑走＋温泉メイン</span></h5>
+                <p>
+                  08:30〜10:00　各自白馬到着・着替え・レンタル手配<br>
+                  10:00〜12:00　初心者はスクールレッスン(2h)、中級者はパノラマ・サンライズ方面で足慣らし<br>
+                  12:00〜13:00　ゲレ食ランチ（カレー／ラーメン／丼もの など）<br>
+                  13:00〜16:00　レベル別にグループ滑走、写真スポットで撮影<br>
+                  16:30〜18:00　宿チェックイン＆温泉（外湯 or 宿の大浴場）<br>
+                  19:00〜　白馬の居酒屋・バルで乾杯
+                </p>
+              </div>
+              <div class="timeline-item">
+                <h5>DAY 2（1/25 日） <span>午前ガッツリ＋余裕帰宅</span></h5>
+                <p>
+                  08:30〜11:30　午前フリー滑走（中級者はロングコース、初心者は緩斜面で復習）<br>
+                  11:30〜12:30　ランチ・片付け・お土産購入<br>
+                  13:00〜14:00　レンタル返却・着替え、バス・新幹線の時間に合わせて解散<br>
+                  〜夜　　　関東組：夕方〜夜には自宅着／関西組：夜行バス or 夕方発の列車で帰阪
+                </p>
               </div>
             </div>
-            <div class="time-row">
-              <div class="time-label">11:30〜</div>
-              <div>長野駅または白馬駅周辺で全員合流、シャトルバスで宿へ移動。</div>
-            </div>
-            <div class="time-row">
-              <div class="time-label">13:30〜</div>
-              <div>レンタル・着替えを済ませ、午後から軽く滑走（足慣らし）。</div>
-            </div>
-            <div class="time-row">
-              <div class="time-label">18:00〜</div>
-              <div>温泉＋夕食。ナイトバーやカフェに行きたい人は軽く2次会。</div>
+            <p class="note">
+              ※レッスンを重視する場合は、午前中は必ずスクールへ。午後は復習タイムにすると初心者もかなり上達しやすいです。
+            </p>
+          </div>
+
+          <div class="plan-grid">
+            <div class="card">
+              <h4><span class="icon">💰</span>おおよその予算感（1人あたり）</h4>
+              <p class="budget">
+                目安：<strong>2.5万〜4.0万円/人</strong>
+                <span>（交通＋1泊2食＋リフト券）</span>
+              </p>
+              <ul>
+                <li>関西発：夜行バス＋宿泊ツアーで2.0万〜3.0万円台が多いイメージ</li>
+                <li>関東発：バス or 新幹線＋宿のパックで2.0万〜3.5万円前後</li>
+              </ul>
+              <small>※時期や出発地・部屋タイプで変動大。ツアー比較サイトで「同じ宿」を指定し、関西発・関東発を別々に検索するのが現実的です。</small>
             </div>
           </div>
         </div>
 
-        <div>
-          <div class="divider-label">Day 2 – 1/25 (Sun.)</div>
-          <div class="timeline">
-            <div class="time-row">
-              <div class="time-label">08:30〜</div>
-              <div>チェックアウトを済ませて荷物を預け、終日滑走。</div>
+        <div class="page-footer">
+          <div class="nav-dots">
+            <div class="nav-dot"></div>
+            <div class="nav-dot active"></div>
+            <div class="nav-dot"></div>
+            <div class="nav-dot"></div>
+          </div>
+          <div class="nav-hint">次：温泉街が楽しい野沢温泉プラン</div>
+        </div>
+        <div class="scroll-hint">SCROLL</div>
+      </section>
+
+      <!-- PAGE 3: PLAN B NOZAWA -->
+      <section class="page plan plan-b" id="plan-b">
+        <div class="page-inner">
+          <header>
+            <div class="plan-label">
+              PLAN B
+              <span class="badge">温泉重視</span>
             </div>
-            <div class="time-row">
-              <div class="time-label">15:00〜</div>
-              <div>レンタル返却・入浴・お土産タイム。</div>
+            <h2>野沢温泉スキー場<br>外湯めぐりもセットののんびりプラン</h2>
+            <p class="plan-header-line">
+              「滑りすぎてヘトヘトになるより、温泉と街も楽しみたい」方向け。初級〜中級コースが多く、温泉街での時間もたっぷりとれる構成です。
+            </p>
+            <div class="tag-row">
+              <span class="tag accent2">長野県・野沢温泉</span>
+              <span class="tag">外湯めぐり</span>
+              <span class="tag">ロングコース</span>
+              <span class="tag">雪質◎</span>
             </div>
-            <div class="time-row">
-              <div class="time-label">17:00〜</div>
-              <div>白馬発 → 長野駅・名古屋駅などから各方面へ帰路。</div>
+            <div class="level-badges">
+              <span class="level good">初心者：◎（パラダイス・上ノ平など緩斜面多数）</span>
+              <span class="level good">中級者：◎（チャレンジ・スカイラインなど）</span>
+              <span class="level">上級者：◯（急斜面・非圧雪エリアもあり）</span>
             </div>
-            <div class="time-row">
-              <div class="time-label">22:00頃</div>
-              <div>関西・関東ともに自宅着イメージ。</div>
+            <p class="small-caption">
+              ※野沢温泉スキー場は、初級・中級コースが全体の多くを占め、ロングコースも豊富。初心者デビュー〜中級者のレベルアップに向いた構成とされています。
+            </p>
+          </header>
+
+          <div class="plan-grid two-col">
+            <div class="card">
+              <h4><span class="icon">🚆</span>アクセスのイメージ</h4>
+              <ul>
+                <li><strong>関東(東京) → 野沢温泉</strong><br>
+                  東京駅→飯山駅：北陸新幹線で約1時間45〜50分<br>
+                  飯山駅→野沢温泉：直通バス(野沢温泉ライナー)で約25分
+                </li>
+                <li><strong>関西(大阪・京都) → 野沢温泉</strong><br>
+                  夜行バス：神戸・大阪・京都 → 長野・野沢温泉方面行きの高速バスを利用（約8時間前後）<br>
+                  もしくは大阪→名古屋→長野→飯山と列車乗り継ぎで約6〜7時間を想定。
+                </li>
+              </ul>
+              <small>※夜行バスは「神戸・大阪・京都⇔長野・野沢温泉」などの季節運行便があり、スキーシーズンに合わせ運行されることが多いです。</small>
+              <!-- Nozawa access & level refs:  [oai_citation:2‡トウゴロウ〖公式〗| 野沢温泉村の民宿](https://togoro-nozawaonsen.com/train-access/?utm_source=chatgpt.com) -->
+            </div>
+
+            <div class="card">
+              <h4><span class="icon">🏘️</span>宿・集合イメージ</h4>
+              <ul>
+                <li>エリア：長坂ゴンドラ or 日影ゲレンデ周辺の旅館・ペンション</li>
+                <li>タイプ：和風旅館〜こじんまり系宿まで幅広いので、価格帯で調整しやすい</li>
+                <li>合流：<strong>24日(土) 9:30〜10:00頃、長坂ゴンドラ山麓駅前集合</strong></li>
+              </ul>
+              <small>到着後すぐ滑れるよう、前夜までにレンタルをネット予約しておくとスムーズです。</small>
             </div>
           </div>
-        </div>
-      </div>
-      <p class="footnote">
-        宿は「白馬村中心部」「八方エリア」「五竜エリア」のいずれかに取ると、バス移動や飲食店の選択肢が多く便利です。
-      </p>
-    </div>
-  </section>
 
-  <!-- PAGE 3: Plan B Nozawa -->
-  <section class="page" data-page="page 03 / plan b">
-    <header class="page-header">
-      <div class="eyebrow">Plan B</div>
-      <h1>野沢温泉 1泊2日プラン</h1>
-      <div class="meta-row">
-        <div class="meta-item">
-          <span class="pill"><strong>おすすめ度</strong> 温泉＆街歩きをしっかり楽しみたい人向け</span>
-        </div>
-        <div class="meta-item">
-          <span class="pill"><strong>主な移動</strong> 北陸新幹線＋路線バス</span>
-        </div>
-      </div>
-    </header>
-
-    <div class="grid-2">
-      <div class="section">
-        <div class="section-header">
-          <div>
-            <div class="section-title">Access</div>
-            <h3>新幹線＋バスで村の入口までスムーズ</h3>
-          </div>
-        </div>
-        <ul>
-          <li><strong>関東（東京駅）発</strong><br>
-            ・北陸新幹線で「飯山駅」へ（約1時間40分）<br>
-            ・飯山駅から野沢温泉ライナーで約20分<br>
-            → 合計およそ <strong>2時間前後</strong>
-          </li>
-          <li><strong>関西（新大阪駅）発</strong><br>
-            ・東海道新幹線で「名古屋」へ（約50分）<br>
-            ・特急しなので「長野」へ（約3時間）<br>
-            ・北陸新幹線 or ローカル線で「飯山」へ（約15〜20分）<br>
-            ・バスで野沢温泉（約20分）<br>
-            → 合計およそ <strong>4.5〜5時間</strong>
-          </li>
-        </ul>
-        <p class="footnote">
-          大阪→東京→飯山と回るルートもあり、時間帯・料金で比較して選べます。
-        </p>
-      </div>
-
-      <div class="section">
-        <div class="section-header">
-          <div>
-            <div class="section-title">Resort Mood</div>
-            <h3>「滑る＋温泉＋街歩き」がセットのスノートリップ</h3>
-          </div>
-        </div>
-        <ul>
-          <li>ゲレンデと温泉街が地続きで、滑走後すぐに外湯めぐりが可能。</li>
-          <li>初心者・中級者向けのロングランコースが多く、景色も良い。</li>
-          <li>ローカルな居酒屋やカフェが多く、夜の街歩きも楽しい。</li>
-          <li>コンパクトな村なので、4人で動きやすいスケール感。</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="section">
-      <div class="section-header">
-        <div>
-          <div class="section-title">Sample Schedule</div>
-          <h3>1泊2日モデルタイムライン（目安）</h3>
-        </div>
-      </div>
-      <div class="grid-2">
-        <div>
-          <div class="divider-label">Day 1 – 1/24 (Sat.)</div>
-          <div class="timeline">
-            <div class="time-row">
-              <div class="time-label">08:00〜</div>
-              <div>
-                関東：東京駅から北陸新幹線で飯山へ。<br>
-                関西：新大阪から名古屋経由で長野・飯山方面へ。
+          <div class="card">
+            <h4><span class="icon">♨️</span>サンプル行程（温泉も含めてしっかり楽しむ）</h4>
+            <div class="timeline">
+              <div class="timeline-item">
+                <h5>DAY 1（1/24 土） <span>滑走＋外湯めぐり</span></h5>
+                <p>
+                  09:30　長坂ゴンドラ前 集合・チケット購入・レンタル引き取り<br>
+                  10:00〜12:00　初心者グループはパラダイス／上ノ平の緩斜面でスクールレッスン<br>
+                  12:00〜13:00　ゲレンデレストランでランチ<br>
+                  13:00〜15:30　レベル別フリー滑走。中級者はスカイラインコースなどロングランへ<br>
+                  16:00〜18:00　チェックイン＆外湯めぐり（数カ所セレクト）<br>
+                  19:00〜　　　温泉街の居酒屋・バーで夕食＆二次会
+                </p>
+              </div>
+              <div class="timeline-item">
+                <h5>DAY 2（1/25 日） <span>午前滑走＋お土産タイム</span></h5>
+                <p>
+                  08:30〜11:30　午前フリー滑走。前日に受けたレッスン内容を復習<br>
+                  11:30〜12:30　ランチ＆片付け<br>
+                  12:30〜14:00　温泉街でお土産タイム。野沢菜・地酒・スイーツなど<br>
+                  午後〜夜　各自、バス・新幹線の時間に合わせて解散
+                </p>
               </div>
             </div>
-            <div class="time-row">
-              <div class="time-label">12:00〜</div>
-              <div>飯山駅で合流、バスで野沢温泉へ移動。チェックイン＆昼食。</div>
+            <p class="note">
+              ※「滑り 7：温泉街 3」くらいの配分。滑り倒すより、初スノボ組の体力を温存しつつ全員が楽しめるバランスです。
+            </p>
+          </div>
+
+          <div class="plan-grid">
+            <div class="card">
+              <h4><span class="icon">💰</span>おおよその予算感（1人あたり）</h4>
+              <p class="budget">
+                目安：<strong>2.5万〜4.0万円/人</strong>
+                <span>（交通＋1泊2食＋リフト券）</span>
+              </p>
+              <ul>
+                <li>関東発：新幹線＋宿セットプランで約2.5万〜3.5万円</li>
+                <li>関西発：夜行バス＋宿泊パックで約2.0万〜3.5万円</li>
+              </ul>
+              <small>温泉街の飲食費・外湯の入浴料などで＋数千円見ておくと安心です。</small>
             </div>
-            <div class="time-row">
-              <div class="time-label">14:00〜</div>
-              <div>半日券などでゲレンデへ。初心者はゆるいコースで足慣らし。</div>
-            </div>
-            <div class="time-row">
-              <div class="time-label">18:00〜</div>
-              <div>外湯めぐり → 村の居酒屋・食堂で夕食 → ほろ酔い街歩き。</div>
-            </div>
+          </div>
+
+          <div class="highlight-bar">
+            <span class="icon">✅</span>
+            「がっつり滑る人」と「温泉街中心でほどほどに滑る人」が同居しやすいのが強み。
           </div>
         </div>
 
-        <div>
-          <div class="divider-label">Day 2 – 1/25 (Sun.)</div>
-          <div class="timeline">
-            <div class="time-row">
-              <div class="time-label">08:30〜</div>
-              <div>朝食後、チェックアウト。荷物を宿かコインロッカーに預けて終日滑走。</div>
+        <div class="page-footer">
+          <div class="nav-dots">
+            <div class="nav-dot"></div>
+            <div class="nav-dot"></div>
+            <div class="nav-dot active"></div>
+            <div class="nav-dot"></div>
+          </div>
+          <div class="nav-hint">最後：アクセス重視のGALA湯沢プラン</div>
+        </div>
+        <div class="scroll-hint">SCROLL</div>
+      </section>
+
+      <!-- PAGE 4: PLAN C GALA YUZAWA -->
+      <section class="page plan plan-c" id="plan-c">
+        <div class="page-inner">
+          <header>
+            <div class="plan-label">
+              PLAN C
+              <span class="badge">アクセス最優先</span>
             </div>
-            <div class="time-row">
-              <div class="time-label">15:00〜</div>
-              <div>レンタル返却・最後にひとっ風呂浴びてさっぱり。</div>
+            <h2>GALA湯沢スキー場<br>移動ストレスを減らす快適プラン</h2>
+            <p class="plan-header-line">
+              特に関東側の移動が圧倒的に楽で、「朝出てサクっと合流」がしやすいプラン。関西からはやや長旅ですが、全員が新幹線移動なので雪道運転の不安がありません。
+            </p>
+            <div class="tag-row">
+              <span class="tag accent3">新潟県・湯沢町</span>
+              <span class="tag">東京駅から最速約71分</span>
+              <span class="tag">駅直結スキーセンター</span>
+              <span class="tag">レンタル充実・手ぶらOK</span>
             </div>
-            <div class="time-row">
-              <div class="time-label">17:00〜</div>
-              <div>バスで飯山駅へ。新幹線・特急で関西／関東へ帰路。</div>
+            <div class="level-badges">
+              <span class="level good">初心者：◎（緩やかな初級コース＆スクール◎）</span>
+              <span class="level good">中級者：◎（2.5kmのロングコースなど）</span>
+              <span class="level">上級者：◯（非圧雪・パークもあり）</span>
             </div>
-            <div class="time-row">
-              <div class="time-label">21:00〜</div>
-              <div>各自帰宅イメージ。</div>
+            <p class="small-caption">
+              ※GALA湯沢は3エリア・16〜17コース構成で、初級〜上級までバリエーション豊富。駅直結の「カワバンガ」にはレンタル・ロッカー・温泉などが集約されています。
+            </p>
+          </header>
+
+          <div class="plan-grid two-col">
+            <div class="card">
+              <h4><span class="icon">🚄</span>アクセスのイメージ</h4>
+              <ul>
+                <li><strong>関東(東京) → GALA湯沢</strong><br>
+                  東京駅→ガーラ湯沢駅：上越新幹線で最速約71分。<br>
+                  駅の改札を出ると、スキーセンターに直結。
+                </li>
+                <li><strong>関西(新大阪など) → GALA湯沢</strong><br>
+                  新大阪→東京：東海道新幹線で約2時間30分前後<br>
+                  東京→ガーラ湯沢：上越新幹線で約70〜90分<br>
+                  合計約4時間前後の「オール新幹線移動」イメージ。
+                </li>
+              </ul>
+              <small>※ダイヤや接続によって前後します。朝イチの新幹線を使うと、関西発でもお昼前後の合流が可能です。</small>
+              <!-- GALA access & beginner-friendly refs:  [oai_citation:3‡ガーラ湯沢スキー場(新潟県湯沢町)｜GALA YUZAWA](https://gala.co.jp/winter/course/?utm_source=chatgpt.com) -->
+            </div>
+
+            <div class="card">
+              <h4><span class="icon">🛏️</span>宿・集合イメージ</h4>
+              <ul>
+                <li>エリア：越後湯沢駅周辺 or GALAエリア近くのホテル</li>
+                <li>タイプ：駅前ビジネスホテル〜リゾートホテルまで選択肢多め</li>
+                <li>合流：<strong>24日(土) 10:30頃 GALA湯沢スキーセンター「カワバンガ」集合</strong></li>
+              </ul>
+              <small>駅直結なので迷いにくく、スキー場までの移動ストレスがほぼゼロなのが最大のメリットです。</small>
             </div>
           </div>
-        </div>
-      </div>
-      <p class="footnote">
-        宿は「ゲレンデ寄り」「温泉街ど真ん中」など選択肢があるので、<br>
-        夜の外湯めぐりを重視するなら温泉街中心エリアが便利です。
-      </p>
-    </div>
-  </section>
 
-  <!-- PAGE 4: Plan C Shiga Kogen + Comparison -->
-  <section class="page" data-page="page 04 / plan c & compare">
-    <header class="page-header">
-      <div class="eyebrow">Plan C & Compare</div>
-      <h1>志賀高原 1泊2日プラン &amp; 3案比較</h1>
-      <div class="meta-row">
-        <div class="meta-item">
-          <span class="pill"><strong>おすすめ度</strong> とにかくたくさん滑りたい人向け</span>
-        </div>
-        <div class="meta-item">
-          <span class="pill"><strong>主な移動</strong> 北陸新幹線＋急行バス</span>
-        </div>
-      </div>
-    </header>
+          <div class="card">
+            <h4><span class="icon">📅</span>サンプル行程（「移動ラク」を優先）</h4>
+            <div class="timeline">
+              <div class="timeline-item">
+                <h5>DAY 1（1/24 土） <span>午前〜午後しっかり滑走</span></h5>
+                <p>
+                  08:00〜10:30　各自新幹線でGALA湯沢到着、レンタル＆着替え<br>
+                  10:30〜12:30　初心者はスクール、慣れている人は中央エリアで足慣らし<br>
+                  12:30〜13:30　センター内レストランでランチ<br>
+                  13:30〜16:00　北エリアの初級・中級コースやロングコースをメインに滑走<br>
+                  16:00〜18:00　温泉・プール・サウナでリフレッシュ、その後宿へ<br>
+                  19:00〜　　　湯沢の居酒屋・ホテル内レストランで夕食
+                </p>
+              </div>
+              <div class="timeline-item">
+                <h5>DAY 2（1/25 日） <span>半日滑って早め帰宅</span></h5>
+                <p>
+                  08:30〜11:00　午前滑走（疲れている人はカフェや温泉でのんびりでもOK）<br>
+                  11:00〜12:00　片付け・お土産購入（駅ナカで完結）<br>
+                  12:00以降　　東京方面は午後早めに帰宅可能／関西方面も夜には帰宅イメージ
+                </p>
+              </div>
+            </div>
+            <p class="note">
+              ※「移動の負担を減らしたい」「雪道運転はしたくない」メンバーが多い場合に特におすすめ。駅からゲレンデまで一切バスに乗らなくて済むのが強力です。
+            </p>
+          </div>
 
-    <div class="grid-2">
-      <div class="section">
-        <div class="section-header">
-          <div>
-            <div class="section-title">Access</div>
-            <h3>長野駅からのバスで高原エリアへ直行</h3>
+          <div class="plan-grid">
+            <div class="card">
+              <h4><span class="icon">💰</span>おおよその予算感（1人あたり）</h4>
+              <p class="budget">
+                目安：<strong>2.5万〜4.5万円/人</strong>
+                <span>（交通＋1泊＋リフト券）</span>
+              </p>
+              <ul>
+                <li>関東発：JR日帰りプランも多く、宿泊をつけても約2.5〜4.0万円が目安</li>
+                <li>関西発：東海道＋上越新幹線利用で交通費がやや高めになりやすい</li>
+              </ul>
+              <small>「関西組は今回だけ少し高めだけど移動ラク優先で…」という割り切りなら十分候補になります。</small>
+            </div>
+          </div>
+
+          <div class="highlight-bar">
+            <span class="icon">🧳</span>
+            荷物を減らすなら「ウェア・板・ブーツ全部レンタル＋小さなリュック」の手ぶらスノボが◎。
           </div>
         </div>
-        <ul>
-          <li><strong>関東（東京駅）発</strong><br>
-            ・北陸新幹線で「長野駅」へ（約1時間20〜30分）<br>
-            ・長野駅東口から志賀高原行き急行バスで約1.5時間<br>
-            → 合計およそ <strong>3〜4時間</strong>
-          </li>
-          <li><strong>関西（新大阪駅）発</strong><br>
-            ・東海道新幹線で「東京駅」または「名古屋」乗り換え<br>
-            ・東京経由の場合：東京 → 長野（北陸新幹線）→ バスで志賀高原<br>
-            → 合計およそ <strong>5〜6時間</strong>
-          </li>
-        </ul>
-        <p class="footnote">
-          関西勢の移動時間はやや長めですが、その分ゲレンデの規模感と雪質はトップクラスです。
-        </p>
-      </div>
 
-      <div class="section">
-        <div class="section-header">
-          <div>
-            <div class="section-title">Resort Mood</div>
-            <h3>日本最大級のスケールでひたすら滑走</h3>
+        <div class="page-footer">
+          <div class="nav-dots">
+            <div class="nav-dot"></div>
+            <div class="nav-dot"></div>
+            <div class="nav-dot"></div>
+            <div class="nav-dot active"></div>
           </div>
+          <div class="nav-hint">お好みのプランをベースに、出発地・予算で微調整してください</div>
         </div>
-        <ul>
-          <li>広大なエリアに多彩なコースが広がり、滑りごたえは抜群。</li>
-          <li>初心者エリアも用意されているが、全体としては「よく滑る人」向けの印象。</li>
-          <li>ゲレンデ直結ホテルが多く、「滑る → すぐ温泉 → 食事」が完結しやすい。</li>
-          <li>吹雪くと移動が大変なこともあるので、天候の確認は必須。</li>
-        </ul>
-      </div>
+        <div class="scroll-hint">END</div>
+      </section>
     </div>
-
-    <div class="highlight-card">
-      <div class="highlight-badge">Quick View</div>
-      <div class="resort-name">3プランざっくり比較</div>
-      <table class="compare">
-        <tr>
-          <th>項目</th>
-          <th>白馬エリア</th>
-          <th>野沢温泉</th>
-          <th>志賀高原</th>
-        </tr>
-        <tr>
-          <th>アクセスバランス</th>
-          <td><span class="badge primary">◎</span><br><span class="small-label">東京・大阪とも標準的</span></td>
-          <td><span class="badge">◯</span><br><span class="small-label">東京◎・大阪やや長め</span></td>
-          <td><span class="badge">△</span><br><span class="small-label">大阪から少し遠い</span></td>
-        </tr>
-        <tr>
-          <th>初心者の滑りやすさ</th>
-          <td>長い緩斜面が多く、スクールも豊富</td>
-          <td>広い緩斜面＆ロングランで楽しみやすい</td>
-          <td>エリアが広く、初心者はエリアを絞ると◎</td>
-        </tr>
-        <tr>
-          <th>アフター（温泉・街）</th>
-          <td>飲食店・バーが多く選択肢豊富</td>
-          <td><span class="badge primary">◎</span> 外湯＆街歩きが最高</td>
-          <td>宿の温泉中心で、落ち着いた雰囲気</td>
-        </tr>
-        <tr>
-          <th>「たくさん滑りたい」度合い</th>
-          <td>ほどほど〜たっぷり</td>
-          <td>滑走＋街歩きのバランス型</td>
-          <td><span class="badge primary">◎</span> ひたすら滑るのに最適</td>
-        </tr>
-      </table>
-      <p class="footnote">
-        初回は「白馬」か「野沢温泉」が特にバランス良くおすすめ。<br>
-        志賀高原は「2回目以降でもっと攻めたい」タイミングで選ぶのもアリです。
-      </p>
-    </div>
-
-    <div class="section">
-      <div class="section-header">
-        <div>
-          <div class="section-title">Next Step</div>
-          <h3>このあと決めておきたいこと</h3>
-        </div>
-      </div>
-      <div class="list-inline">
-        <span>どのプランを第一候補にするか</span>
-        <span>関西＆関東の出発駅（新大阪／京都／東京／上野など）</span>
-        <span>レンタルの有無（板・ブーツ・ウェア）</span>
-        <span>ナイターを滑るかどうか</span>
-        <span>温泉重視か、ゲレンデ目の前重視か</span>
-      </div>
-      <p class="footnote">
-        プランを1つに絞ったら、具体的な列車の時刻と宿候補（ゲレンデサイド or 温泉街）を2〜3件ピックアップして、<br>
-        料金とキャンセルポリシーを見比べて最終決定するのがおすすめです。
-      </p>
-    </div>
-  </section>
-
+  </div>
 </body>
 </html>
